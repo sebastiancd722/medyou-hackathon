@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MedYou - Patient Portal</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <header>
+    <div class="logo">
+      <div class="logo-icon" aria-hidden="true">💊</div>
+      <h1>MedYou</h1>
+    </div>
+    <div class="user-profile">
+      <span id="user-name-display">Loading...</span>
+      <div class="avatar" id="user-avatar-display" aria-label="User Initials">--</div>
+    </div>
+  </header>
+
+  <main>
+    <nav class="app-tabs" role="tablist">
+      <button class="tab-btn active" onclick="switchTab('dashboard')" id="tab-dashboard-btn" role="tab" aria-selected="true">Today</button>
+      <button class="tab-btn" onclick="switchTab('browse')" id="tab-browse-btn" role="tab" aria-selected="false">Browse Medications</button>
+    </nav>
+
+    <div id="view-dashboard">
+      <div class="daily-grid">
+        <section class="card-column">
+          <div class="section-header">
+            <h2>My Medications</h2>
+            <p class="subtitle">Manage your active prescriptions and refills.</p>
+          </div>
+          <div id="med-card-container">
+            </div>
+        </section>
+
+        <section class="schedule-column">
+          <div class="section-header">
+            <h2>Today's Schedule</h2>
+            <p class="subtitle">Track your daily adherence.</p>
+          </div>
+
+          <div class="adherence-score-box">
+            <div>
+              <span class="score-label">Adherence Score</span>
+              <span class="next-dose-label" id="next-dose-display">All caught up!</span>
+            </div>
+            <span class="score-value" id="adherence-display">--%</span>
+          </div>
+
+          <div id="dose-list" role="list">
+            </div>
+        </section>
+      </div>
+
+      <section class="weekly-dashboard">
+        <div class="history-module">
+          <div class="section-header">
+            <h2>Last 7 Days</h2>
+            <p class="subtitle" id="history-summary">Loading stats...</p>
+          </div>
+          <div id="history-chart" class="history-chart">
+            </div>
+        </div>
+
+        <div class="forecast-module">
+          <div class="section-header">
+            <h2>Next 7 Days</h2>
+            <p class="subtitle">Upcoming dose schedule.</p>
+            <p class="subtitle-small">Based on your current prescriptions</p>
+          </div>
+          <div id="forecast-grid" class="forecast-grid">
+            </div>
+        </div>
+      </section>
+    </div>
+
+    <div id="view-browse" class="hidden">
+      <div class="browse-container">
+        <aside class="browse-sidebar">
+          <h3>Conditions</h3>
+          <div id="category-list">
+            </div>
+        </aside>
+
+        <div class="browse-content">
+          <div class="section-header">
+            <h2 id="browse-title">Diabetes</h2>
+            <p class="subtitle" id="browse-user-context"></p>
+            <p class="subtitle-small">Educational information only. Not medical advice.</p>
+          </div>
+          <div id="catalog-grid" class="catalog-grid">
+            </div>
+        </div>
+      </div>
+
+      <div class="discussion-panel">
+        <div class="discussion-header">
+          <h3>📝 My Discussion List</h3>
+          <p class="subtitle">Items to discuss with your doctor or pharmacist.</p>
+        </div>
+        <ul id="discussion-list-ul">
+          <li class="empty-msg">No items added yet.</li>
+        </ul>
+        <p class="disclaimer-small">Disclaimer: This list is for your personal reference only and does not constitute a prescription request.</p>
+      </div>
+    </div>
+
+  </main>
+
+  <div id="info-modal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-describedby="modal-instructions">
+    <div class="modal-content">
+      <h3 id="modal-title">Medication Name</h3>
+      <div class="modal-body">
+        <p id="modal-instructions"></p>
+        <div class="pharmacist-note-box">
+          <strong>Pharmacist Note:</strong>
+          <p id="modal-note"></p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button id="close-modal-btn" aria-label="Close details">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="demo-controls">
+    <button onclick="loginUser(1)" aria-label="Load demo patient Alex">Load Alex</button>
+    <button onclick="loginUser(2)" aria-label="Load demo patient Sarah">Load Sarah</button>
+    <button onclick="clearDemoData()" aria-label="Reset demo data">Reset Data</button>
+  </div>
+
+  <div id="toast" class="toast hidden" role="alert" aria-live="polite"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
